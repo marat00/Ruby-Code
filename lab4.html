@@ -1,0 +1,30 @@
+<html>
+<head>
+   <title>Lab 4 - Marat Pernabekov</title>
+   <style>
+   th
+   {
+     background-color:blue;
+     color:white;
+   }
+   td
+   {
+     background-color:#ffdab9
+   }
+   </style>
+</head>
+<body>
+  <h1>Fall 2013 CS 132A Students</h1>
+  <table border= "1">
+  <th>Number</th>
+  <th>User Name</th>
+  <th>Password</th>
+  <th>Uid</th>
+  <th>Gid</th>
+  <th>Gcos Field</th>
+  <th>Home Directory</th>
+  <th>Login Shell</th>
+  <%= @html.join %>
+  </table>
+</body>
+</html>

@@ -1,0 +1,138 @@
+#!/usr/local/bin/ruby
+# SCRIPT: lab2.cgi
+# CREATOR: Marat_Pernabekov
+puts "Content-type: text/html"
+puts # This blank line is mandatory
+
+# display the original string
+puts "the_string"
+the_string <<-HERE
+               this string has leading space and too    MANY tabs and sPaCes betweenX
+   the indiVidual Words in each Line.X
+  each Line ends with a accidentally  aDDED  X.X
+            in this lab you wilL WRITE code that "sAnITizES" this string by normalizingX
+   ("normalizing" means   capitalizing sentences   and setting otherX
+  characters to lower case)     and removes in       the extra spaces between WOrds.X
+HERE
+
+puts the_string
+
+# display the initial array
+puts "\nThe Initial Array"
+array = the_string.scan(/\s|\S/)
+print array
+
+# display the Part 1 array
+puts "\n\n#3 Contents of Part 1"
+array1 = array.slice(0..138)
+print array1
+
+# display the Part 2 array
+puts "\n\n#4 Contents of Part 2"
+array2 = array.slice(139..the_string.length)
+print array2
+
+# display the elements common to both arrays
+puts "\n\n#5 Set of Common Elements"
+print array1 & array2
+
+# display the differences between Part One and Two
+puts "\n\n#6 Difference Between Parts One and Two"
+print array1 - array2
+puts "\n\n#7 Difference Between Parts Two and One"
+print array2 - array1
+
+# display elements at end of each array
+puts "\n\n#8 Elements At End of Parts One and Two"
+puts 'One: ' + array1.at(-1).inspect
+puts 'Two: ' + array2.at(-1).inspect
+
+# display elements at front of each array
+puts "\n\n#9 Elements At Front of Parts One and Two"
+puts 'One: ' + array1.first.inspect
+puts 'Two: ' + array2.first.inspect
+
+# upcasing the characters in Part Two and remove whitespace
+# append the result to Part One and then flatten the new Part One
+puts "\n\n#10 Part Two, Upcased With White Space Removed, Inserted Into One At Index 100, And Flattened"
+array2.delete_if{|w| w == "\n"|| w == " "}.map!(&:upcase)
+array1.insert(99, array2)
+print array1.flatten!
+
+# remove whitespace from the New Part One
+puts "\n\n#11 The New Array With Spaces Removed"
+print array1.delete_if{|x| x == " " || x == "\n"}
+
+# add "!" to all characters in Part One
+puts "\n\n#12 After Adding A '!' To Each Element"
+print array1.collect!{|x| x + "!"}
+
+# remove the last element and show the modified array
+puts "\n\n#13 Popped The Last Element"
+puts pop = array1.pop
+print "The remains of the array: " 
+print array1
+
+# reinsert the last element at index 0
+puts "\n\n#14 Inserted The Popped Element At Index 0"
+print array1.unshift(pop)
+
+# remove the punctuation marks and lower-case characters
+puts "\n\n#15 The Final Array With All The Elements Containing Lower-Case Letters Removed"
+print array1.select{|i| i =~ /[A-Z]/}
+
+#----------------------------------------------------------------------------------------------------
+
+the_string
+               this string has leading space and too    MANY tabs and sPaCes betweenX
+   the indiVidual Words in each Line.X
+  each Line ends with a accidentally  aDDED  X.X
+            in this lab you wilL WRITE code that "sAnITizES" this string by normalizingX
+   ("normalizing" means   capitalizing sentences   and setting otherX
+  characters to lower case)     and removes in       the extra spaces between WOrds.X
+This is an example of what your Lab 2 Array Exercises output should resemble. As I was working through the problems, I found it helpful to print out the size of the arrays, as I created them, using
+
+#3 Contents Of Part One
+[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "t", "h", "i", "s", " ", "s", "t", "r", "i", "n", "g", " ", "h", "a", "s", " ", "l", "e", "a", "d", "i", "n", "g", " ", "s", "p", "a", "c", "e", " ", "a", "n", "d", " ", "t", "o", "o", " ", " ", " ", " ", "M", "A", "N", "Y", " ", "t", "a", "b", "s", " ", "a", "n", "d", " ", "s", "P", "a", "C", "e", "s", " ", "b", "e", "t", "w", "e", "e", "n", "X", "\n", " ", " ", " ", "t", "h", "e", " ", "i", "n", "d", "i", "V", "i", "d", "u", "a", "l", " ", "W", "o", "r", "d", "s", " ", "i", "n", " ", "e", "a", "c", "h", " ", "L", "i", "n", "e", ".", "X", "\n", " ", " ", "e", "a", "c", "h", " ", "L", "i", "n", "e", " ", "e", "n"]
+
+#4 Contents Of Part Two
+["d", "s", " ", "w", "i", "t", "h", " ", "a", " ", "a", "c", "c", "i", "d", "e", "n", "t", "a", "l", "l", "y", " ", " ", "a", "D", "D", "E", "D", " ", " ", "X", ".", "X", "\n", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "i", "n", " ", "t", "h", "i", "s", " ", "l", "a", "b", " ", "y", "o", "u", " ", "w", "i", "l", "L", " ", "W", "R", "I", "T", "E", " ", "c", "o", "d", "e", " ", "t", "h", "a", "t", " ", "\"", "s", "A", "n", "I", "T", "i", "z", "E", "S", "\"", " ", "t", "h", "i", "s", " ", "s", "t", "r", "i", "n", "g", " ", "b", "y", " ", "n", "o", "r", "m", "a", "l", "i", "z", "i", "n", "g", "X", "\n", " ", " ", " ", "(", "\"", "n", "o", "r", "m", "a", "l", "i", "z", "i", "n", "g", "\"", " ", "m", "e", "a", "n", "s", " ", " ", " ", "c", "a", "p", "i", "t", "a", "l", "i", "z", "i", "n", "g", " ", "s", "e", "n", "t", "e", "n", "c", "e", "s", " ", " ", " ", "a", "n", "d", " ", "s", "e", "t", "t", "i", "n", "g", " ", "o", "t", "h", "e", "r", "X", "\n", " ", " ", "c", "h", "a", "r", "a", "c", "t", "e", "r", "s", " ", "t", "o", " ", "l", "o", "w", "e", "r", " ", "c", "a", "s", "e", ")", " ", " ", " ", " ", " ", "a", "n", "d", " ", "r", "e", "m", "o", "v", "e", "s", " ", "i", "n", " ", " ", " ", " ", " ", " ", " ", "t", "h", "e", " ", "e", "x", "t", "r", "a", " ", "s", "p", "a", "c", "e", "s", " ", "b", "e", "t", "w", "e", "e", "n", " ", "W", "O", "r", "d", "s", ".", "X", "\n"]
+
+#5 Set Of Common Elements
+[" ", "t", "h", "i", "s", "r", "n", "g", "a", "l", "e", "d", "p", "c", "o", "A", "b", "w", "X", "\n", "u", "W", "L", "."]
+
+#6 Difference Between Parts One And Two
+["M", "N", "Y", "P", "C", "V"]
+
+#7 Difference Between Parts Two And One
+["y", "D", "D", "E", "D", "y", "R", "I", "T", "E", "\"", "I", "T", "z", "E", "S", "\"", "y", "m", "z", "(", "\"", "m", "z", "\"", "m", "z", ")", "m", "v", "x", "O"]
+
+#8 Elements At End Of Parts One And Two
+One: "n"
+Two: "\n"
+
+#9 Elements At Front Of Parts One And Two
+One: " "
+Two: "d"
+
+#10 Part Two, Upcased With White Space Removed, Inserted Into One At Index 100, And Flattened
+[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "t", "h", "i", "s", " ", "s", "t", "r", "i", "n", "g", " ", "h", "a", "s", " ", "l", "e", "a", "d", "i", "n", "g", " ", "s", "p", "a", "c", "e", " ", "a", "n", "d", " ", "t", "o", "o", " ", " ", " ", " ", "M", "A", "N", "Y", " ", "t", "a", "b", "s", " ", "a", "n", "d", " ", "s", "P", "a", "C", "e", "s", " ", "b", "e", "t", "w", "e", "e", "n", "X", "\n", " ", " ", " ", "t", "h", "e", " ", "i", "n", "d", "i", "V", "i", "d", "D", "S", "W", "I", "T", "H", "A", "A", "C", "C", "I", "D", "E", "N", "T", "A", "L", "L", "Y", "A", "D", "D", "E", "D", "X", ".", "X", "I", "N", "T", "H", "I", "S", "L", "A", "B", "Y", "O", "U", "W", "I", "L", "L", "W", "R", "I", "T", "E", "C", "O", "D", "E", "T", "H", "A", "T", "\"", "S", "A", "N", "I", "T", "I", "Z", "E", "S", "\"", "T", "H", "I", "S", "S", "T", "R", "I", "N", "G", "B", "Y", "N", "O", "R", "M", "A", "L", "I", "Z", "I", "N", "G", "X", "(", "\"", "N", "O", "R", "M", "A", "L", "I", "Z", "I", "N", "G", "\"", "M", "E", "A", "N", "S", "C", "A", "P", "I", "T", "A", "L", "I", "Z", "I", "N", "G", "S", "E", "N", "T", "E", "N", "C", "E", "S", "A", "N", "D", "S", "E", "T", "T", "I", "N", "G", "O", "T", "H", "E", "R", "X", "C", "H", "A", "R", "A", "C", "T", "E", "R", "S", "T", "O", "L", "O", "W", "E", "R", "C", "A", "S", "E", ")", "A", "N", "D", "R", "E", "M", "O", "V", "E", "S", "I", "N", "T", "H", "E", "E", "X", "T", "R", "A", "S", "P", "A", "C", "E", "S", "B", "E", "T", "W", "E", "E", "N", "W", "O", "R", "D", "S", ".", "X", "u", "a", "l", " ", "W", "o", "r", "d", "s", " ", "i", "n", " ", "e", "a", "c", "h", " ", "L", "i", "n", "e", ".", "X", "\n", " ", " ", "e", "a", "c", "h", " ", "L", "i", "n", "e", " ", "e", "n"]
+
+#11 The New Array With Spaces Removed
+["t", "h", "i", "s", "s", "t", "r", "i", "n", "g", "h", "a", "s", "l", "e", "a", "d", "i", "n", "g", "s", "p", "a", "c", "e", "a", "n", "d", "t", "o", "o", "M", "A", "N", "Y", "t", "a", "b", "s", "a", "n", "d", "s", "P", "a", "C", "e", "s", "b", "e", "t", "w", "e", "e", "n", "X", "t", "h", "e", "i", "n", "d", "i", "V", "i", "d", "D", "S", "W", "I", "T", "H", "A", "A", "C", "C", "I", "D", "E", "N", "T", "A", "L", "L", "Y", "A", "D", "D", "E", "D", "X", ".", "X", "I", "N", "T", "H", "I", "S", "L", "A", "B", "Y", "O", "U", "W", "I", "L", "L", "W", "R", "I", "T", "E", "C", "O", "D", "E", "T", "H", "A", "T", "\"", "S", "A", "N", "I", "T", "I", "Z", "E", "S", "\"", "T", "H", "I", "S", "S", "T", "R", "I", "N", "G", "B", "Y", "N", "O", "R", "M", "A", "L", "I", "Z", "I", "N", "G", "X", "(", "\"", "N", "O", "R", "M", "A", "L", "I", "Z", "I", "N", "G", "\"", "M", "E", "A", "N", "S", "C", "A", "P", "I", "T", "A", "L", "I", "Z", "I", "N", "G", "S", "E", "N", "T", "E", "N", "C", "E", "S", "A", "N", "D", "S", "E", "T", "T", "I", "N", "G", "O", "T", "H", "E", "R", "X", "C", "H", "A", "R", "A", "C", "T", "E", "R", "S", "T", "O", "L", "O", "W", "E", "R", "C", "A", "S", "E", ")", "A", "N", "D", "R", "E", "M", "O", "V", "E", "S", "I", "N", "T", "H", "E", "E", "X", "T", "R", "A", "S", "P", "A", "C", "E", "S", "B", "E", "T", "W", "E", "E", "N", "W", "O", "R", "D", "S", ".", "X", "u", "a", "l", "W", "o", "r", "d", "s", "i", "n", "e", "a", "c", "h", "L", "i", "n", "e", ".", "X", "e", "a", "c", "h", "L", "i", "n", "e", "e", "n"]
+
+#12 After Adding A '!' To Each Element
+["t!", "h!", "i!", "s!", "s!", "t!", "r!", "i!", "n!", "g!", "h!", "a!", "s!", "l!", "e!", "a!", "d!", "i!", "n!", "g!", "s!", "p!", "a!", "c!", "e!", "a!", "n!", "d!", "t!", "o!", "o!", "M!", "A!", "N!", "Y!", "t!", "a!", "b!", "s!", "a!", "n!", "d!", "s!", "P!", "a!", "C!", "e!", "s!", "b!", "e!", "t!", "w!", "e!", "e!", "n!", "X!", "t!", "h!", "e!", "i!", "n!", "d!", "i!", "V!", "i!", "d!", "D!", "S!", "W!", "I!", "T!", "H!", "A!", "A!", "C!", "C!", "I!", "D!", "E!", "N!", "T!", "A!", "L!", "L!", "Y!", "A!", "D!", "D!", "E!", "D!", "X!", ".!", "X!", "I!", "N!", "T!", "H!", "I!", "S!", "L!", "A!", "B!", "Y!", "O!", "U!", "W!", "I!", "L!", "L!", "W!", "R!", "I!", "T!", "E!", "C!", "O!", "D!", "E!", "T!", "H!", "A!", "T!", "\"!", "S!", "A!", "N!", "I!", "T!", "I!", "Z!", "E!", "S!", "\"!", "T!", "H!", "I!", "S!", "S!", "T!", "R!", "I!", "N!", "G!", "B!", "Y!", "N!", "O!", "R!", "M!", "A!", "L!", "I!", "Z!", "I!", "N!", "G!", "X!", "(!", "\"!", "N!", "O!", "R!", "M!", "A!", "L!", "I!", "Z!", "I!", "N!", "G!", "\"!", "M!", "E!", "A!", "N!", "S!", "C!", "A!", "P!", "I!", "T!", "A!", "L!", "I!", "Z!", "I!", "N!", "G!", "S!", "E!", "N!", "T!", "E!", "N!", "C!", "E!", "S!", "A!", "N!", "D!", "S!", "E!", "T!", "T!", "I!", "N!", "G!", "O!", "T!", "H!", "E!", "R!", "X!", "C!", "H!", "A!", "R!", "A!", "C!", "T!", "E!", "R!", "S!", "T!", "O!", "L!", "O!", "W!", "E!", "R!", "C!", "A!", "S!", "E!", ")!", "A!", "N!", "D!", "R!", "E!", "M!", "O!", "V!", "E!", "S!", "I!", "N!", "T!", "H!", "E!", "E!", "X!", "T!", "R!", "A!", "S!", "P!", "A!", "C!", "E!", "S!", "B!", "E!", "T!", "W!", "E!", "E!", "N!", "W!", "O!", "R!", "D!", "S!", ".!", "X!", "u!", "a!", "l!", "W!", "o!", "r!", "d!", "s!", "i!", "n!", "e!", "a!", "c!", "h!", "L!", "i!", "n!", "e!", ".!", "X!", "e!", "a!", "c!", "h!", "L!", "i!", "n!", "e!", "e!", "n!"]
+
+#13 Popped This Element
+n!
+The Remains of the array: ["t!", "h!", "i!", "s!", "s!", "t!", "r!", "i!", "n!", "g!", "h!", "a!", "s!", "l!", "e!", "a!", "d!", "i!", "n!", "g!", "s!", "p!", "a!", "c!", "e!", "a!", "n!", "d!", "t!", "o!", "o!", "M!", "A!", "N!", "Y!", "t!", "a!", "b!", "s!", "a!", "n!", "d!", "s!", "P!", "a!", "C!", "e!", "s!", "b!", "e!", "t!", "w!", "e!", "e!", "n!", "X!", "t!", "h!", "e!", "i!", "n!", "d!", "i!", "V!", "i!", "d!", "D!", "S!", "W!", "I!", "T!", "H!", "A!", "A!", "C!", "C!", "I!", "D!", "E!", "N!", "T!", "A!", "L!", "L!", "Y!", "A!", "D!", "D!", "E!", "D!", "X!", ".!", "X!", "I!", "N!", "T!", "H!", "I!", "S!", "L!", "A!", "B!", "Y!", "O!", "U!", "W!", "I!", "L!", "L!", "W!", "R!", "I!", "T!", "E!", "C!", "O!", "D!", "E!", "T!", "H!", "A!", "T!", "\"!", "S!", "A!", "N!", "I!", "T!", "I!", "Z!", "E!", "S!", "\"!", "T!", "H!", "I!", "S!", "S!", "T!", "R!", "I!", "N!", "G!", "B!", "Y!", "N!", "O!", "R!", "M!", "A!", "L!", "I!", "Z!", "I!", "N!", "G!", "X!", "(!", "\"!", "N!", "O!", "R!", "M!", "A!", "L!", "I!", "Z!", "I!", "N!", "G!", "\"!", "M!", "E!", "A!", "N!", "S!", "C!", "A!", "P!", "I!", "T!", "A!", "L!", "I!", "Z!", "I!", "N!", "G!", "S!", "E!", "N!", "T!", "E!", "N!", "C!", "E!", "S!", "A!", "N!", "D!", "S!", "E!", "T!", "T!", "I!", "N!", "G!", "O!", "T!", "H!", "E!", "R!", "X!", "C!", "H!", "A!", "R!", "A!", "C!", "T!", "E!", "R!", "S!", "T!", "O!", "L!", "O!", "W!", "E!", "R!", "C!", "A!", "S!", "E!", ")!", "A!", "N!", "D!", "R!", "E!", "M!", "O!", "V!", "E!", "S!", "I!", "N!", "T!", "H!", "E!", "E!", "X!", "T!", "R!", "A!", "S!", "P!", "A!", "C!", "E!", "S!", "B!", "E!", "T!", "W!", "E!", "E!", "N!", "W!", "O!", "R!", "D!", "S!", ".!", "X!", "u!", "a!", "l!", "W!", "o!", "r!", "d!", "s!", "i!", "n!", "e!", "a!", "c!", "h!", "L!", "i!", "n!", "e!", ".!", "X!", "e!", "a!", "c!", "h!", "L!", "i!", "n!", "e!", "e!"]
+
+#14 Inserted The Popped Element At Index 0
+["n!", "t!", "h!", "i!", "s!", "s!", "t!", "r!", "i!", "n!", "g!", "h!", "a!", "s!", "l!", "e!", "a!", "d!", "i!", "n!", "g!", "s!", "p!", "a!", "c!", "e!", "a!", "n!", "d!", "t!", "o!", "o!", "M!", "A!", "N!", "Y!", "t!", "a!", "b!", "s!", "a!", "n!", "d!", "s!", "P!", "a!", "C!", "e!", "s!", "b!", "e!", "t!", "w!", "e!", "e!", "n!", "X!", "t!", "h!", "e!", "i!", "n!", "d!", "i!", "V!", "i!", "d!", "D!", "S!", "W!", "I!", "T!", "H!", "A!", "A!", "C!", "C!", "I!", "D!", "E!", "N!", "T!", "A!", "L!", "L!", "Y!", "A!", "D!", "D!", "E!", "D!", "X!", ".!", "X!", "I!", "N!", "T!", "H!", "I!", "S!", "L!", "A!", "B!", "Y!", "O!", "U!", "W!", "I!", "L!", "L!", "W!", "R!", "I!", "T!", "E!", "C!", "O!", "D!", "E!", "T!", "H!", "A!", "T!", "\"!", "S!", "A!", "N!", "I!", "T!", "I!", "Z!", "E!", "S!", "\"!", "T!", "H!", "I!", "S!", "S!", "T!", "R!", "I!", "N!", "G!", "B!", "Y!", "N!", "O!", "R!", "M!", "A!", "L!", "I!", "Z!", "I!", "N!", "G!", "X!", "(!", "\"!", "N!", "O!", "R!", "M!", "A!", "L!", "I!", "Z!", "I!", "N!", "G!", "\"!", "M!", "E!", "A!", "N!", "S!", "C!", "A!", "P!", "I!", "T!", "A!", "L!", "I!", "Z!", "I!", "N!", "G!", "S!", "E!", "N!", "T!", "E!", "N!", "C!", "E!", "S!", "A!", "N!", "D!", "S!", "E!", "T!", "T!", "I!", "N!", "G!", "O!", "T!", "H!", "E!", "R!", "X!", "C!", "H!", "A!", "R!", "A!", "C!", "T!", "E!", "R!", "S!", "T!", "O!", "L!", "O!", "W!", "E!", "R!", "C!", "A!", "S!", "E!", ")!", "A!", "N!", "D!", "R!", "E!", "M!", "O!", "V!", "E!", "S!", "I!", "N!", "T!", "H!", "E!", "E!", "X!", "T!", "R!", "A!", "S!", "P!", "A!", "C!", "E!", "S!", "B!", "E!", "T!", "W!", "E!", "E!", "N!", "W!", "O!", "R!", "D!", "S!", ".!", "X!", "u!", "a!", "l!", "W!", "o!", "r!", "d!", "s!", "i!", "n!", "e!", "a!", "c!", "h!", "L!", "i!", "n!", "e!", ".!", "X!", "e!", "a!", "c!", "h!", "L!", "i!", "n!", "e!", "e!"]
+
+#15 The Final Array With All The Elements Containing Lower-Case Letters Removed
+["M!", "A!", "N!", "Y!", "P!", "C!", "X!", "V!", "D!", "S!", "W!", "I!", "T!", "H!", "A!", "A!", "C!", "C!", "I!", "D!", "E!", "N!", "T!", "A!", "L!", "L!", "Y!", "A!", "D!", "D!", "E!", "D!", "X!", "X!", "I!", "N!", "T!", "H!", "I!", "S!", "L!", "A!", "B!", "Y!", "O!", "U!", "W!", "I!", "L!", "L!", "W!", "R!", "I!", "T!", "E!", "C!", "O!", "D!", "E!", "T!", "H!", "A!", "T!", "S!", "A!", "N!", "I!", "T!", "I!", "Z!", "E!", "S!", "T!", "H!", "I!", "S!", "S!", "T!", "R!", "I!", "N!", "G!", "B!", "Y!", "N!", "O!", "R!", "M!", "A!", "L!", "I!", "Z!", "I!", "N!", "G!", "X!", "N!", "O!", "R!", "M!", "A!", "L!", "I!", "Z!", "I!", "N!", "G!", "M!", "E!", "A!", "N!", "S!", "C!", "A!", "P!", "I!", "T!", "A!", "L!", "I!", "Z!", "I!", "N!", "G!", "S!", "E!", "N!", "T!", "E!", "N!", "C!", "E!", "S!", "A!", "N!", "D!", "S!", "E!", "T!", "T!", "I!", "N!", "G!", "O!", "T!", "H!", "E!", "R!", "X!", "C!", "H!", "A!", "R!", "A!", "C!", "T!", "E!", "R!", "S!", "T!", "O!", "L!", "O!", "W!", "E!", "R!", "C!", "A!", "S!", "E!", "A!", "N!", "D!", "R!", "E!", "M!", "O!", "V!", "E!", "S!", "I!", "N!", "T!", "H!", "E!", "E!", "X!", "T!", "R!", "A!", "S!", "P!", "A!", "C!", "E!", "S!", "B!", "E!", "T!", "W!", "E!", "E!", "N!", "W!", "O!", "R!", "D!", "S!", "X!", "W!", "L!", "X!", "L!"]
+
+------------------------------------------------------------------
+#P.S. This script only runs as a .rb file
